@@ -2,6 +2,7 @@ package com.k2view.agent;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.k2view.agent.secrets.SecretManager;
 
 import java.time.LocalDateTime;
 import java.util.function.UnaryOperator;
@@ -27,7 +28,7 @@ public class Utils {
      * Build a dyamicString based on the env() function
      */
     public static String dynamicString(String s) {
-        return dynamicString(s, r -> def(env(r), ""));
+        return dynamicString(s, SecretManager::secretValue);
     }
     /**
      * Get an environment variable from the Property (-D) and if not exists, from the environment
